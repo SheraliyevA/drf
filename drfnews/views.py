@@ -43,6 +43,12 @@ class Mashq(APIView):
             return Response(serializer.data)
         return Response(serializer.errors)
 
+    def patch(request):
+        serializer = MashSerializer(request.user, data=request.DATA, partial=True)
+        if serializer.is_valid():
+            serializer.save()
+        return Response(serializer.data) 
+
 class Comments(APIView):
     def get(self,request):
         comment=Comment.objects.all()

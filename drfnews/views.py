@@ -63,12 +63,14 @@ class Comments(APIView):
         return Response(serializer.errors)
 
 
+class DetailView(APIView):
+    def get_object(self,pk):
+        return Mashqlar.objects.get(pk=pk)
 
-# def detail(request,pk):
-#     poll=get_object_or_404(Mashqlar,pk=pk)
-#     context={"result":{
-#             'question':poll.title,
-#             'question_body':poll.body,
-#             'create':poll.created
-#         }}
-#     return JsonResponse(data)
+    def path(self,request,pk):
+        testmdel=self.get_object(pk=pk)
+        serializer=MashSerializer(testmdel, data=request.data, partial=True)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors)

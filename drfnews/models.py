@@ -19,7 +19,7 @@ class Mashqlar(Model):
         return f"{self.title[:40]}"
 
 class Comment(Model):
-    body=models.TextField()
+    body=models.PositiveIntegerField()
     created=models.DateTimeField(auto_now_add=True)
     user=models.ForeignKey(User,on_delete=models.CASCADE)
     question=models.ForeignKey(Mashqlar,on_delete=models.CASCADE)

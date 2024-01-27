@@ -64,13 +64,10 @@ class Comments(APIView):
 
 
 class DetailView(APIView):
-    def get_object(self,request,pk):
-        return Mashqlar.objects.get(pk=pk)
-
-    def patch(self,request,pk):
-        testmdel=self.get_object(pk=pk)
-        serializer=MashSerializer(testmdel, data=request.data, partial=True)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data)
-        return Response(serializer.errors)
+    def get(self,request,pk):
+        try:
+            mashq=Mashqlar.objects.get(pk=pk)
+            ser=MashSerializer(mashq)
+            return Response(ser.data)
+        except:
+            return Response({"xato":"bu id li kitob mavjud emas"})

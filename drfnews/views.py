@@ -67,7 +67,7 @@ class DetailView(APIView):
     def get_object(self,pk):
         return Mashqlar.objects.get(pk=pk)
 
-    def path(self,request,pk):
+    def patch(self,request,pk):
         testmdel=self.get_object(pk=pk)
         serializer=MashSerializer(testmdel, data=request.data, partial=True)
         if serializer.is_valid():

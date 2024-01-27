@@ -64,7 +64,7 @@ class Comments(APIView):
 
 
 class DetailView(APIView):
-    def get_object(self,pk):
+    def get_object(self,request,pk):
         return Mashqlar.objects.get(pk=pk)
 
     def patch(self,request,pk):

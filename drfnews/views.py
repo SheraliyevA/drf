@@ -63,7 +63,7 @@ class Comments(APIView):
         return Response(serializer.errors)
 
 
-class DetailView(APIView):
+class MashqDetailView(APIView):
     def get(self,request,pk):
         try:
             mashq=Mashqlar.objects.get(pk=pk)
